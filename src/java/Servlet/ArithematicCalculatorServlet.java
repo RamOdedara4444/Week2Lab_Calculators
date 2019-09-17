@@ -59,18 +59,19 @@ public class ArithematicCalculatorServlet extends HttpServlet {
              int second=0;
         int first=0;
         
-       try{ 
-         first = Integer.valueOf(request.getParameter("first"));
+      
+        try{
+            try{
+            first = Integer.valueOf(request.getParameter("first"));
         second = Integer.valueOf(request.getParameter("second"));
-       }catch(Exception e)
-               {
-                request.setAttribute("message3",m3);
+            }catch(Exception e)
+            {
+             request.setAttribute("message3",m3);
             getServletContext().getRequestDispatcher("/WEB-INF/calculator.jsp")
                     .forward(request, response);
             return;
-               }
-        try{
-        
+            
+            }
        if(operation.equals("+")){
        result= first + second; 
        }else if(operation.equals("-")){
