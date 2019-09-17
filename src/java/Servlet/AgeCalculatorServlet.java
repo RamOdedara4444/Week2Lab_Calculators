@@ -31,6 +31,9 @@ public class AgeCalculatorServlet extends HttpServlet {
             throws ServletException, IOException {
         String Age = request.getParameter("age");
         String m="please Enter your age";
+        String m1="Your next birth Date is On";
+          String m2="Please Enter the Number Not String";
+          int a=0;
 
         // to view print statements see the Output window -> Apache Tomcat tab
         System.out.println(Age);
@@ -38,21 +41,39 @@ public class AgeCalculatorServlet extends HttpServlet {
         // to view log statements see the Output window -> Apache Tomcat Log tab
         log(Age);
       
-        
-      
-        if (Age == null || Age.equals("")
-                ) {
+        try{
             
-            getServletContext().getRequestDispatcher("/WEB-INF/EnterAge.jsp")
+        if (Age == null || Age.equals("")) {
+              
+             request.setAttribute("message",m); 
+            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
+                    .forward(request, response);
+           
+            return;
+        } 
+        }
+        catch(Exception e)
+        {
+       request.setAttribute("message2",m2);
+            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
                     .forward(request, response);
             return;
         }
         
+        try{
+        a=Integer.valueOf(Age);
+            a++;
+        }catch(Exception e)
+        {
+        request.setAttribute("message2",m2);
+            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
+                    .forward(request, response);
+            return;
+        }
+              request.setAttribute("message1",m1);
         
-             
+     
         
-      int a=Integer.valueOf(Age);
-      a++;  
         request.setAttribute("aa", a);
         getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp").forward(request, response);
     }

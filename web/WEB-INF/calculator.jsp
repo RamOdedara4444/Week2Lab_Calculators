@@ -20,7 +20,8 @@
           <input type="submit" name="operation" value="*"></input>
           <input type="submit" name="operation" value="%"></input>
       </form>
-          <h1></h1>
-          <h1>${result}</h1>
+          <h4>${message1}</h4>
+          <h4>${message}  ${result}</h4>
+          <h4>${message4}</h4>
     </body>
 </html>

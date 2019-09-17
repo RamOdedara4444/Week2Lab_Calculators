@@ -28,12 +28,49 @@ public class ArithematicCalculatorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int first = Integer.valueOf(request.getParameter("first"));
-        int second = Integer.valueOf(request.getParameter("second"));
+        String f = request.getParameter("first");
+        String s = request.getParameter("second");
         String operation=request.getParameter("operation");
         int result=0;
-        
+        String m="your result is ";
+        String m1= "Please Enter the Numbers First";
+        String m2= "Please Enter the Number Not String";
+        String m3= "Please Enter the Number not String";
+      
         System.out.println("result");
+        
+        try{
+         if (f== null || f.equals("") || s== null || s.equals("")) {
+             request.setAttribute("message1",m1);
+            getServletContext().getRequestDispatcher("/WEB-INF/calculator.jsp")
+                    .forward(request, response);
+            return;
+        }
+        }catch(Exception e)
+        {request.setAttribute("message2",m2);
+            getServletContext().getRequestDispatcher("/WEB-INF/calculator.jsp")
+                    .forward(request, response);
+            return;
+        }
+        
+             request.setAttribute("message",m);
+       
+        
+             int second=0;
+        int first=0;
+        
+       try{ 
+         first = Integer.valueOf(request.getParameter("first"));
+        second = Integer.valueOf(request.getParameter("second"));
+       }catch(Exception e)
+               {
+                request.setAttribute("message3",m3);
+            getServletContext().getRequestDispatcher("/WEB-INF/calculator.jsp")
+                    .forward(request, response);
+            return;
+               }
+        try{
+        
        if(operation.equals("+")){
        result= first + second; 
        }else if(operation.equals("-")){
@@ -44,10 +81,18 @@ public class ArithematicCalculatorServlet extends HttpServlet {
        
        result= first*second;
        }
-        
+        }catch(Exception e)
+                {
+                
+                request.setAttribute("message3",m3);
+            getServletContext().getRequestDispatcher("/WEB-INF/calculator.jsp")
+                    .forward(request, response);
+            return;
+                }
         
         
         request.setAttribute("result", result);
+        request.setAttribute("message", m);
         // to view print statements see the Output window -> Apache Tomcat tab
         System.out.println(first);
         System.out.println(second);
