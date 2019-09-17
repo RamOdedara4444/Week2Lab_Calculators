@@ -33,7 +33,7 @@ public class ArithematicCalculatorServlet extends HttpServlet {
         String operation=request.getParameter("operation");
         int result=0;
         
-
+        System.out.println("result");
        if(operation.equals("+")){
        result= first + second; 
        }else if(operation.equals("-")){
